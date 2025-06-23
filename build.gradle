@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1' // ← 新增 shadow 插件
+}
+
+group 'com.example'
+version '1.0'
+
+archivesBaseName = 'ReplaceText'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.9'
+}
+
+// 设置主类
+jar {
+    manifest {
+        attributes 'Main-Class': 'ReplaceText'
+    }
+}
+
+// 配置 Shadow 插件，打包所有依赖进一个可执行 JAR
+shadowJar {
+    mergeServiceFiles()
+}
